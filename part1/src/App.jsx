@@ -1,49 +1,33 @@
-// const Hello = props => {
-//     console.log(props);
-//     return (
-//         <div>
-//             <p>
-//                 Hello {props.name}, you are {props.age} years old
-//             </p>
-//         </div>
-//     );
-// };
+import { useState } from "react";
 
-// const App = () => {
-//     const name = "Peter";
-//     const age = 10;
-//     return (
-//         <>
-//             <h1>Greetings</h1>
-//             <Hello name="Maya" age={26 + 10} />
-//             <Hello name={name} age={age} />
-//         </>
-//     );
-// };
+const Display = ({ counter }) => <div>{counter}</div>;
 
-// const App = () => {
-//     const friends = [
-//         { name: "Peter", age: 4 },
-//         { name: "Maya", age: 10 },
-//     ];
-
-//     return (
-//         <div>
-//             <p>
-//                 {friends[0].name} {friends[0].age}
-//             </p>
-//             <p>
-//                 {friends[1].name} {friends[1].age}
-//             </p>
-//         </div>
-//     );
-// };
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>;
 
 const App = () => {
-    const friends = ["Peter", "Maya"];
+    const [counter, setCounter] = useState(0);
+    console.log("rendering with counter value", counter);
+
+    const increaseByOne = () => {
+        console.log("increasing, value before", counter);
+        setCounter(counter + 1);
+    };
+    const decreaseByOne = () => {
+        console.log("decreasing, value before", counter);
+        setCounter(counter - 1);
+    };
+
+    const setToZero = () => {
+        console.log("resetting to zero, value before", counter);
+        setCounter(0);
+    };
+
     return (
         <div>
-            <p>{friends}</p>
+            <Display counter={counter} />
+            <Button onClick={increaseByOne} text="plus" />
+            <Button onClick={setToZero} text="zero" />
+            <Button onClick={decreaseByOne} text="minus" />
         </div>
     );
 };
