@@ -1,26 +1,23 @@
 import { useState } from "react";
 
-const App = () => {
-    const [left, setLeft] = useState(0);
-    const [right, setRight] = useState(0);
-    const [allClicks, setAll] = useState([]);
+const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</button>;
 
-    const handleLeftClick = () => {
-        setAll(allClicks.concat("L"));
-        setLeft(left + 1);
-    };
-    const handleRightClick = () => {
-        setAll(allClicks.concat("R"));
-        setRight(right + 1);
-    };
+const App = () => {
+    // save clicks of each button to its own state
+    const [good, setGood] = useState(0);
+    const [neutral, setNeutral] = useState(0);
+    const [bad, setBad] = useState(0);
 
     return (
         <div>
-            {left}
-            <button onClick={handleLeftClick}>left</button>
-            <button onClick={handleRightClick}>right</button>
-            {right}
-            <p>{allClicks.join(" ")}</p>
+            <h1>give feedback</h1>
+            <Button handleClick={() => setGood(good + 1)} text="good" />
+            <Button handleClick={() => setNeutral(neutral + 1)} text="neutral" />
+            <Button handleClick={() => setBad(bad + 1)} text="bad" />
+            <h1>statistics</h1>
+            <p>good {good}</p>
+            <p>neutral {neutral}</p>
+            <p>bad {bad}</p>
         </div>
     );
 };
